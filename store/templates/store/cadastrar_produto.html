@@ -1,0 +1,57 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+<div>
+    <div class="box-element" id="form-wrapper">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="produto-info">
+                <strong><p style="text-align: center;">Adicionar Produtos na Loja</p></strong>
+                <div class="form-field">
+                    <input required class="form-control" name="nome" placeholder="Nome do Produto">
+                </div>
+                <div class="form-field">
+                    <input required class="form-control" type="number" step="0.01" name="preco" placeholder="Preço">
+                </div>
+                <div class="form-field">
+                    <input required class="form-control" type="number" step="1" name="stock" placeholder="Quantidade">
+                </div>
+                <div class="form-field">
+                    <label><input type="checkbox" name="digital"> Produto Digital</label>
+                </div>
+                <div class="form-field">
+                    <input required type="file" name="imagem">
+                </div>
+            </div>
+            <hr>
+            <div class="product-spec">
+                <strong><p style="text-align: center;">Especificaços do produto</p></strong>
+                <div id="especificacoes">
+
+                    <div class="form-field" style="display: flex; flex-flow: nowrap; gap: 20px; width: 100%;">
+                        <input class="form-control" type="text" name="chave" placeholder="Chave   (ex.: Tamanho)">
+                    
+                        <input class="form-control" type="text" name="valor" placeholder="Valor  (ex.: XL)">
+                    </div>
+                </div>
+                <button type="button" onclick="addSpec()">Adicionar Especificação</button>
+            </div><br>
+
+            <input class="btn btn-success btn-block" type="submit" value="Cadastrar produto">
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+function addSpec() {
+    const div = document.getElementById('especificacoes');
+    div.innerHTML += `<div class="form-field" style="display: flex; flex-flow: nowrap; gap: 20px; width: 100%;">
+                        <input class="form-control" type="text" name="chave" placeholder="Chave (ex.: Marca)">
+                    
+                        <input class="form-control" type="text" name="valor" placeholder="Valor (ex.: Samsung)">
+                      </div>`;
+}
+</script>
+{% endblock content %}

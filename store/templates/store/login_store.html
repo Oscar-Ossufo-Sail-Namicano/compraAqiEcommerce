@@ -1,0 +1,25 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<div>
+    <div class="box-element" id="form-wrapper">
+        <form id="form" method="POST">
+            {% csrf_token %}
+            <strong><p style="text-align: center;">Login de Comerciante</p></strong>
+            <p style="text-align: center;">Entre na sua conta de comerciante</p>
+            <div class="form-field">
+                <input required class="form-control" type="text" name="username" placeholder="Usuário">
+            </div>
+            <div class="form-field">
+                <input required class="form-control" type="password" name="password" placeholder="Senha">
+            </div><br><br>
+
+            <input class="btn btn-success btn-block" type="submit" value="Entrar">
+        </form>
+        <br>
+        <p style="text-align: center;">Nao eh comerciante? <a href="{% url 'register_store' %}">Seja um!</a></p>
+    </div>
+
+</div>
+{% endblock content %}

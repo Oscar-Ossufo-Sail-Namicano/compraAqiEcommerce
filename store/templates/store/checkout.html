@@ -11,7 +11,7 @@
 							<input required class="form-control" type="text" name="name" placeholder="Nome..">
 						</div>
 						<div class="form-field">
-							<input required class="form-control" type="email" name="email" placeholder="Email..">
+							<input required class="form-control" type="tel" name="phone" placeholder="Telefone">
 						</div>
 					</div>
 					
@@ -46,7 +46,7 @@
 				<small>Opções de pagamento</small>
 				<div id="payment-method">
 					<div class="form-field">
-						<input required class="form-control" type="text" name="account-number" placeholder="Seu número m-Pesa">
+						<input required class="form-control" id="mpesa-number" type="tel" name="mpesa-number" placeholder="Seu número m-Pesa">
 					</div>
 					
 				</div>
@@ -152,7 +152,7 @@
 
 	    	var userFormData = {
 				'name':null,
-				'email':null,
+				'phone':null,
 				'total':total,
 			}
 
@@ -172,10 +172,11 @@
 
 	    	if (user == 'AnonymousUser'){
 	    		userFormData.name = form.name.value
-	    		userFormData.email = form.email.value
+	    		userFormData.phone = form.phone.value
 	    	}
 
-	    	console.log('Shipping Info:', shippingInfo)
+	    	var paymentMethod = document.getElementById("mpesa-number").value
+			console.log('Shipping Info:', shippingInfo)
 	    	console.log('User Info:', userFormData)
 
 	    	var url = "/process_order/"
@@ -185,7 +186,7 @@
 	    			'Content-Type':'applicaiton/json',
 	    			'X-CSRFToken':csrftoken,
 	    		}, 
-	    		body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo}),
+	    		body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo, 'paymentMethod':paymentMethod}),
 	    		
 	    	})
 	    	.then((response) => response.json())

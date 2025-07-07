@@ -1,0 +1,39 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div>
+    <div class="box-element" id="form-wrapper">
+        <form id="form" method="POST">
+            {% csrf_token %}
+            <strong><p style="text-align: center;">Abrir nova conta</p></strong>
+            <div class="form-field">
+                <input required class="form-control" type="text" name="username" placeholder="Usuário">
+            </div>
+            <div class="form-field">
+                <input required class="form-control" type="text" name="name" placeholder="Nome Completo">
+            </div>
+            <div class="form-field">
+                <input class="form-control" type="email" name="email" placeholder="Email">
+            </div>
+            <div class="form-field">
+                <input required class="form-control" type="tel" name="phone" placeholder="Telefone">
+            </div>
+            <div class="form-field">
+                <input required class="form-control" type="password" name="password" placeholder="Sua senha">
+            </div>
+            <div class="form-field">
+                <input required class="form-control" type="password" name="confirm-password" placeholder="Confirme senha">
+            </div>
+            <br>
+            <br>
+
+            <input class="btn btn-success btn-block" type="submit" value="Cadastrar-se">
+        </form>
+        <br>
+        <p style="text-align: center;">Já tem conta? <a href="{% url 'login_customer' %}">Entrar</a></p>
+    </div>
+
+</div>
+{% endblock content %}

@@ -1,0 +1,35 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+    <div>
+        <div>
+            <div class="box-element" id="form-wrapper">
+                <div>
+                    <a  class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Voltar</a>
+                    <div>
+                        <img src="{{ produto.imageURL }}" width="80%">
+                    </div>
+                    <h5>{{ produto.name }}</h5>
+                    <p><strong>Preço:</strong> {{ produto.price }}MT</p>
+                    <p><strong>Loja:</strong> {{ produto.store.name }}</p>
+                    <p><strong>Stock:</strong> {{ produto.stock }}</p>
+
+                </div>
+            
+                <div>
+                    <h5>Especificações:</h5>
+                    <ul>
+                        {% for esp in produto.especificacoes.all %}
+                            <li><strong>{{ esp.chave }}:</strong> {{ esp.valor }}</li>
+                        {% empty %}
+                            <li>Nenhuma especificação.</li>
+                        {% endfor %}
+                    </ul>
+                <div>
+            </div>
+
+        </div>		
+					
+    </div>
+{% endblock content %}

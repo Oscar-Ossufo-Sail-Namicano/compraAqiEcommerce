@@ -9,6 +9,10 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	
+	{% block headElements %}
+
+	{% endblock headElements %}
 
 	<script type="text/javascript">
 		var user = '{{request.user}}'
@@ -64,7 +68,7 @@
 <body>
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	  <a class="navbar-brand" href="{% url 'store' %}">CompraAqi</a>
+	  <a class="navbar-brand" href="{% url 'store' %}"><strong>CompraAqi</strong></a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  </button>
@@ -76,13 +80,20 @@
 	      </li>
 	 
 	    </ul>
-	    <div class="form-inline my-2 my-lg-0">
-	     	<a href="#"class="btn btn-warning">Login</a>
-	     	
+	    <div class="form-inline my-2 my-lg-0" id="header-login-logout" style="flex-flow: nowrap;">
+			{% if user.is_authenticated %}
+				<strong style="color: white; margin-right: 4%;">
+					<a class="nav-link" href="#" ></a>{{ user.last_name|default:user.username }}
+				</strong>
+				<a href="{% url 'logout' %}" class="btn btn-warning">Logout</a>
+			{% else %}
+	     		<a href="{% url 'login_customer' %}" class="btn btn-warning">Login</a>
+	     	{% endif %}
+
 	     	<a href="{% url 'cart' %}">
 	    		<img  id="cart-icon" src="{% static 'images/cart.png' %}">
 	    	</a>
-	    	<p id="cart-total">{{cartItems}}</p>
+	    	<a a href="{% url 'cart' %}"><p id="cart-total">{{cartItems}}</p></a>
 
 	    </div>
 	  </div>

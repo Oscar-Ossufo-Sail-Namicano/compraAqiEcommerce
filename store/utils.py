@@ -58,7 +58,7 @@ def cartData(request):
 	
 def guestOrder(request, data):
 	name = data['form']['name']
-	email = data['form']['email']
+	email = data['form']['phone']
 
 	cookieData = cookieCart(request)
 	items = cookieData['items']
@@ -83,6 +83,50 @@ def guestOrder(request, data):
 		)
 	return customer, order
 
-#-----------------------------------
-def processPayment():
-	pass
+#--------------------------- API PAYMENT ------------------------------#
+from pprint import pprint
+import os
+from portalsdk import APIContext, APIMethodType, APIRequest
+
+service_provider_code = os.getenv('SERVICE_PROVIDER_CODE')
+api_key = os.getenv('API_KEY')
+public_key = os.getenv('PUBLIC_KEY')
+api_address = os.getenv('API_ADDRESS')
+api_path = os.getenv('API_PATH')
+api_port = os.getenv('API_PORT')
+
+pprint(f"""
+	{api_key},
+	{api_address},
+	{api_port},
+	{api_path},
+	{public_key},
+	{service_provider_code}"""
+)
+
+
+def processPayment(clientePhone, amount, transaction_reference, thirdy_party_reference):
+    api_context = APIContext()
+    api_context.api_key = api_key
+    api_context.public_key = public_key
+    api_context.ssl = True
+    api_context.method_type = APIMethodType.POST
+    api_context.address = api_address
+    api_context.port = int(api_port)
+    api_context.path = api_path
+    
+    api_context.add_header('Origin', '*')
+
+    api_context.add_parameter('input_TransactionReference',transaction_reference)
+    api_context.add_parameter('input_CustomerMSISDN',clientePhone)
+    api_context.add_parameter('input_Amount',amount)
+    api_context.add_parameter('input_ThirdPartyReference',thirdy_party_reference)
+    api_context.add_parameter('input_ServiceProviderCode',service_provider_code)
+
+
+    api_request = APIRequest(api_context)
+    result = api_request.execute()
+
+    pprint(result.status_code)
+    pprint(result.headers)
+    pprint(result.body)

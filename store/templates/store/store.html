@@ -1,5 +1,10 @@
 {% extends 'store/main.html' %}
 {% load static %}
+
+{% block headElements %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/store.css' %}">
+{% endblock headElements %}
+
 {% block content %}
 	<div class="row">
 		{% for product in products %}
@@ -11,8 +16,8 @@
 
 				<div style="display: flex; gap:1em; justify-content: space-between;">
 					<div>
-						<button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Adicionar ao carrinho</button>
-						<a class="btn btn-outline-success" href="#">Ver</a>		
+						<button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Levar</button>
+						<a class="btn btn-outline-success" href="{% url 'ver_produto' product.id%}">Ver</a>		
 					</div>
 				
 					<h4><strong>{{product.price}}MT</strong></h4>
@@ -20,6 +25,43 @@
 			</div>
 		</div>
 		{% endfor %}
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div id="bottom-cart-div">
+		<div class="form-inline my-2 my-lg-0">
+				
+			<a href="#">
+				<img  id="cart-icon" src="{% static 'images/home1.png' %}">
+			</a>
+			<p id="#"></p>
+		</div>
+
+		<div class="form-inline my-2 my-lg-0">
+				
+			<a href="{% url 'cart' %}">
+				<img  id="cart-icon" src="{% static 'images/cart.png' %}">
+			</a>
+			<a a href="{% url 'cart' %}"><p id="cart-total">{{cartItems}}</p></a>
+		</div>
+		<div class="form-inline my-2 my-lg-0">
+				
+			<a href="#login">
+				<img  id="cart-icon" src="{% static 'images/user1.png' %}">
+			</a>
+			<p id="#"></p>
+		</div>
+		<div class="form-inline my-2 my-lg-0">
+				
+			<a href="#login">
+				<img  id="cart-icon" src="{% static 'images/settings1.png' %}">
+			</a>
+			<p id="#"></p>
+		</div>
 	</div>
 
 {% endblock content %}
