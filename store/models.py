@@ -40,7 +40,7 @@ class Product(models.Model):
     price = models.FloatField()
     stock = models.IntegerField()
     digital = models.BooleanField(default=False, null=True, blank=True)
-    image = models.ImageField(null=True, blank=True, upload_to='static/media/')
+    image = models.ImageField(null=True, blank=True, upload_to='products/')
     store = models.ForeignKey(Store, related_name='produtos', on_delete=models.SET_NULL, null=True, blank=True)
     frete = models.FloatField()
 
