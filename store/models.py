@@ -50,7 +50,9 @@ class Product(models.Model):
     @property
     def imageURL(self):
         try:
-            return self.image.url
+            head = "https://res.cloudinary.com/dfi13gkiz/"
+			#image/upload/v1752438373/wew7310js7wcbmsludo3.png
+            return head + self.image.url[6:]
         except:
             return ''
 
