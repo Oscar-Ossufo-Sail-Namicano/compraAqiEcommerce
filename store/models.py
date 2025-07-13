@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from cloudinary.models import CloudinaryField
 # Create your models here.
 
 from django.db import models
@@ -40,7 +40,7 @@ class Product(models.Model):
     price = models.FloatField()
     stock = models.IntegerField()
     digital = models.BooleanField(default=False, null=True, blank=True)
-    image = models.ImageField(null=True, blank=True, upload_to='products/')
+    image = CloudinaryField('image')
     store = models.ForeignKey(Store, related_name='produtos', on_delete=models.SET_NULL, null=True, blank=True)
     frete = models.FloatField()
 

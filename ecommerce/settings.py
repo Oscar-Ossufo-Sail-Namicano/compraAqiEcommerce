@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 from dotenv import load_dotenv
 import dj_database_url
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -147,6 +151,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+cloudinary.config(
+    cloud_name = os.environ.get("CLOUDNARY_CLOUD_NAME"),
+    api_key = os.environ.get("CLOUDNARY_API_KEY"),
+    api_secret = os.environ.get("CLOUDNARY_API_SECRET"),
+)
+
+
+'''
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.environ.get("CLOUDNARY_CLOUD_NAME"),
@@ -154,5 +166,5 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': os.environ.get("CLOUDNARY_API_SECRET"),
     
 }
-
+'''
 #CLOUDINARY_URL= "cloudinary://888338134883123:vMNM7eASf50ubBwjptVrAvQ4krA@dfi13gkiz"
